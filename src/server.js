@@ -1,3 +1,4 @@
+// src\server.js
 import http from "http";
 import WebSocket from "ws";
 import express from "express";
@@ -24,11 +25,20 @@ const sockets = [];
 
 wss.on("connection", (socket) => {
   sockets.push(socket);
+  socket["nickname"] = "Anon";
   console.log("Connected to Browser ✅");
-  socket.on("close", onSocketClose);
-  socket.on("message", (message) => {
-    const messageString = message.toString("utf8");
-    socket.send(messageString);
+  socket.on("message", (msg) => {
+    const message = JSON.parse(msg);
+    switch (message.type) {
+      case "new_message":
+        sockets.forEach((aSocket) =>
+          aSocket.send(`${socket.nickname}: ${message.payload}`)
+        );
+        break; // 여기에 break를 추가합니다.
+      case "nickname":
+        socket["nickname"] = message.payload;
+        break; // 여기에 break를 추가합니다.
+    }
   });
 });
 

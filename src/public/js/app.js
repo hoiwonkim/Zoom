@@ -1,5 +1,5 @@
 // src\public\js\app.js
-const messageList = document.querySelector("ul");
+/* const messageList = document.querySelector("ul");
 const nickForm = document.querySelector("#nick");
 const messageForm = document.querySelector("#message");
 const socket = new WebSocket(`ws://${window.location.host}`);
@@ -41,3 +41,6 @@ function handleNickSubmit(event) {
 
 messageForm.addEventListener("submit", handleSubmit);
 nickForm.addEventListener("submit", handleNickSubmit);
+- WebSocket 방법으로 진행한 코드 소스 */
+
+const socket = io();

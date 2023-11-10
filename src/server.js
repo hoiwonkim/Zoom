@@ -28,11 +28,11 @@ const wsServer = new Server(httpServer);
 - WebSocket 방법으로 진행한 코드 소스 */
 
 wsServer.on("connection", (socket) => {
-  socket.on("enter_room", (msg, done) => {
-    console.log(msg);
+  socket.on("enter_room", (roomName, done) => {
+    console.log(roomName);
     setTimeout(() => {
-      done();
-    }, 10000);
+      done("hello from the backend");
+    }, 15000);
   });
 });
 

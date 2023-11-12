@@ -2,6 +2,7 @@
 import http from "http";
 // import WebSocket from "ws";
 import { Server } from "socket.io";
+import { instrument } from "@socket.io/admin-ui";
 import express from "express";
 import path from "path";
 
@@ -20,7 +21,17 @@ const wss = new WebSocket.Server({ server });
 - WebSocket 방법으로 진행한 코드 소스 */
 
 const httpServer = http.createServer(app);
-const wsServer = new Server(httpServer);
+// const wsServer = new Server(httpServer);
+const wsServer = new Server(httpServer, {
+  cors: {
+    origin: ["https://admin.socket.io"],
+    credentials: true,
+  },
+});
+
+instrument(wsServer, {
+  auth: false,
+});
 
 function publicRooms() {
   const {

@@ -10,6 +10,7 @@ html(lang="en")
         header
             h1 Noom
         main
+            //- -Socketio
             //- form#nick
             //-     input(type="text", placeholder="choose a nickname", required)
             //-     button Save
@@ -33,8 +34,9 @@ html(lang="en")
                 //-     input(placeholder="message", required, type="text")
                     button Send
             div#myStream
-                    video#myFace(autoplay,playsinline, muted, width="400", height="400")
+                    video#myFace(autoplay,playsinline, width="400", height="400")
                     button#mute Mute
-                    button#camera Turn Camera Off 
+                    button#camera Turn Camera Off
+                    select#cameras 
         script(src="/socket.io/socket.io.js") 
         script(src="/public/js/app.js") 
